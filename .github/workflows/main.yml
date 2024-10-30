@@ -34,7 +34,7 @@ jobs:
         distribution: 'adopt'
 
     - name: to path
-      run: ll
+      run: ls -l
 
     - name: Build with Maven
       run: ${{ github.event.inputs.mvnCommand }}
