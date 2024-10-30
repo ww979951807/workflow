@@ -3,17 +3,17 @@ name: Build Java Project
 on:
   workflow_dispatch:
     inputs:
-      projectName:
-        description: 'Project Name'
+      projectUrl:
+        description: 'Project Url'
         required: true
       projectVersion:
-        description: 'Version Number'
+        description: 'Project Version'
         required: true
       jdkVersion:
-        description: 'Version Number'
+        description: 'Jdk Version'
         required: true
       mvnCommand:
-        description: 'Version Number'
+        description: 'Mvn Command'
         required: true
 
 jobs:
