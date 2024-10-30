@@ -15,7 +15,7 @@ on:
       nodeVersion:
         description: 'Node Version'
         required: true
-      mvnCommand:
+      buildCommand:
         description: 'build Command'
         required: true
       pathName:
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
       with:
         repository: '${{ github.event.inputs.projectName }}'
@@ -37,15 +37,21 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '${{ github.event.inputs.jdkVersion }}'
-        distribution: 'adopt'
+        distribution: 'Set up JDK'
 
-    - name: Build with Maven
-      run: ${{ github.event.inputs.mvnCommand }}
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '${{ github.event.inputs.nodeVersion }}'
+        distribution: 'Set up Node'
 
-    - name: Compress the TAR files
+    - name: Build Project
+      run: ${{ github.event.inputs.buildCommand }}
+
+    - name: Compress File
       run: tar -czf project-package.tar.gz ${{ github.event.inputs.pathName }}
 
-    - name: Upload artifact
+    - name: Upload File
       uses: actions/upload-artifact@v4
       with:
         name: project-package
