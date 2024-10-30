@@ -21,9 +21,6 @@ jobs:
       with:
         repository: '${{ github.event.inputs.projectName }}'
  
-    - name: Setup rpm
-      uses: actions/setup-rpm@v1
- 
     - name: Install fpm dependencies
       run: |
         sudo apt-get update
