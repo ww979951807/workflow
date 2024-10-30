@@ -24,7 +24,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        repository: '${{ github.event.inputs.projectName }}'
+        repository: 'apache/seatunnel'
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up JDK 11
