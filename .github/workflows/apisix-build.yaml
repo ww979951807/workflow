@@ -13,7 +13,7 @@ on:
  
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-20.04-arm64]
     
     steps:
     - name: Checkout Repository
@@ -29,3 +29,13 @@ jobs:
 
     - name: Build Project
       run: make package type=rpm app=dashboard version=2.13 checkout=v2.13
+
+    - name: Compress File
+      run: tar -czf project-package.tar.gz output
+
+    - name: Upload File
+      uses: actions/upload-artifact@v4
+      with:
+        name: project-package
+        path: project-package.tar.gz
+        retention-days: 1
