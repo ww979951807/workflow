@@ -37,13 +37,12 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '${{ github.event.inputs.jdkVersion }}'
-        distribution: 'Set up JDK'
+        distribution: 'adopt'
 
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
         node-version: '${{ github.event.inputs.nodeVersion }}'
-        distribution: 'Set up Node'
 
     - name: Build Project
       run: ${{ github.event.inputs.buildCommand }}
