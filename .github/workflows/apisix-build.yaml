@@ -28,4 +28,4 @@ jobs:
         sudo gem install --no-document fpm
 
     - name: Build Project
-      run: make package type=rpm app=dashboard version=2.13 checkout=v2.13 image_base=centos image_tag=7
+      run: make package type=rpm app=dashboard version=2.13 checkout=v2.13 image_base=ubuntu image_tag=20.04
