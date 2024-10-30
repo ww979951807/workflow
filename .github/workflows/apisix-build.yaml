@@ -1,0 +1,30 @@
+
+name: apixis build
+ 
+on:
+  workflow_dispatch:
+    inputs:
+      projectName:
+        description: 'Project Name'
+        required: true
+      pathName:
+        description: 'Path Name'
+        required: true
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        repository: '${{ github.event.inputs.projectName }}'
+ 
+    - name: Install fpm, make, and rpm
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y fpm make rpm
+
+    - name: Build Project
+      run: make package type=rpm app=dashboard version=2.13 checkout=2.13 image_base=centos image_tag=7
