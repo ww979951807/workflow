@@ -21,10 +21,14 @@ jobs:
       with:
         repository: '${{ github.event.inputs.projectName }}'
  
-    - name: Install fpm, make, and rpm
+    - name: Setup rpm
+      uses: actions/setup-rpm@v1
+ 
+    - name: Install fpm dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y fpm make rpm
+        sudo apt-get install -y ruby ruby-dev build-essential rpm
+        gem install --no-document fpm
 
     - name: Build Project
       run: make package type=rpm app=dashboard version=2.13 checkout=2.13 image_base=centos image_tag=7
