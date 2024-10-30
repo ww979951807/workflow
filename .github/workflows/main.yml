@@ -34,7 +34,7 @@ jobs:
         distribution: 'adopt'
 
     - name: to path
-      run: cd seatunnel
+      run: ll
 
     - name: Build with Maven
       run: ${{ github.event.inputs.mvnCommand }}
