@@ -1,0 +1,41 @@
+
+name: apixis build
+ 
+on:
+  workflow_dispatch:
+    inputs:
+      projectName:
+        description: 'Project Name'
+        required: true
+      pathName:
+        description: 'Path Name'
+        required: true
+ 
+jobs:
+  build:
+    runs-on: otel-linux-arm64
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        repository: '${{ github.event.inputs.projectName }}'
+ 
+    - name: Install fpm dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ruby ruby-dev build-essential rpm
+        sudo gem install --no-document fpm
+
+    - name: Build Project
+      run: make package type=rpm app=dashboard version=2.13 checkout=v2.13 image_base=centos image_tag=7
+
+    - name: Compress File
+      run: tar -czf project-package.tar.gz ${{ github.event.inputs.pathName }}
+
+    - name: Upload File
+      uses: actions/upload-artifact@v4
+      with:
+        name: project-package
+        path: project-package.tar.gz
+        retention-days: 1
