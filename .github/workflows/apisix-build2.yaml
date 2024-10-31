@@ -1,26 +1,26 @@
 
-name: apixis build2
+name   名字: apixis build2   名称：apixis build2
  
-on:
+on   在:
   workflow_dispatch:
-    inputs:
+    inputs   输入:
       projectName:
-        description: 'Project Name'
-        required: true
-      pathName:
-        description: 'Path Name'
-        required: true
+        description   描述: 'Project Name'   “项目名称”   “项目名称”
+        required   要求: true   真正的
+      pathName   路径名:
+        description   描述: 'Path Name'   的路径名称
+        required   要求: true   真正的
  
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: pguyot/arm-runner-action@v2
-      with:
+jobs   工作:
+  build   构建:
+    runs-on   运行在: ubuntu-latest   上运行:ubuntu-latest
+    steps   步骤:
+    - uses   使用: actions/checkout@v2-使用：actions/checkout@v2
+    - uses   使用: pguyot/arm-runner-action@v2-使用：pguyot/arm-runner-action@v2
+      with   与:
         base_image: raspios_lite_arm64:latest
-        commands: |
-          echo '===================================================================================================='
-          arch
-          yum install -y zip curl unzip 
+        commands   命令: |
+          echo '===================================================================================================='回声  '===================================================================================================='
+          arch   拱
+          apt-get update
             
