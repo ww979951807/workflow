@@ -19,4 +19,4 @@ jobs:
     - uses: pguyot/arm-runner-action@v2
       with:
         base_image: raspi_4_bookworm:20231109
-        commands: sudo chmod 777 ./test.sh && ./test.sh
+        commands: chmod 777 ./test.sh && ./test.sh
