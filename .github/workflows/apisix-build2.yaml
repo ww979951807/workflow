@@ -19,6 +19,7 @@ jobs:
     - uses: pguyot/arm-runner-action@v2
       with:
         commands: |
-          ls -l
-          archwer
+          echo '===================================================================================================='
+          arch
+          yum install -y zip curl unzip 
             
