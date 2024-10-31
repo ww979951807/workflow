@@ -19,5 +19,6 @@ jobs:
     - uses: pguyot/arm-runner-action@v2
       with:
         commands: |
-            arch
-            ls -l
+          ls -l
+          archwer
+            
