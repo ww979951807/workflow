@@ -1,0 +1,10 @@
+name: test-command
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+steps:
+    - name: command
+      run: |
+        docker info
