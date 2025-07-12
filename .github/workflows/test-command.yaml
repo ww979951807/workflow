@@ -16,3 +16,5 @@ jobs:
     - name: test-command
       run: |
         docker info
+        docker version
+        docker compose version
