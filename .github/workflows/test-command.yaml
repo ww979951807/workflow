@@ -18,3 +18,6 @@ jobs:
         docker info
         docker version
         docker compose version
+        lscpu
+        free -m
+        df -h /
