@@ -2,11 +2,7 @@
 name: test-command
  
 on:
-  workflow_dispatch:
-    inputs:
-      projectName:
-        description: 'anyting'
-        required: true
+  workflow_dispatch
  
 jobs:
   build:
