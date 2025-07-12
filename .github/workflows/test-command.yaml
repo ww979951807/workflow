@@ -1,4 +1,5 @@
 
+
 name: test-command
  
 on:
@@ -17,3 +18,4 @@ jobs:
         lscpu
         free -m
         df -h /
+        ifconfig
