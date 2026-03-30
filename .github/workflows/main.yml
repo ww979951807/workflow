@@ -21,10 +21,19 @@ on:
       pathName:
         description: 'Path Name'
         required: true
+      runnerType:
+        description: 'Runner Type'
+        required: false
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.runnerType }}
 
     steps:
     - name: Checkout Repository
@@ -43,6 +52,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '${{ github.event.inputs.nodeVersion }}'
+
+    - name: Show Architecture Info
+      run: |
+        echo "Architecture: $(uname -m)"
+        echo "Runner: ${{ github.event.inputs.runnerType }}"
+        echo "Available memory:"
+        free -h
+        echo "CPU cores:"
+        nproc
 
     - name: Build Project
       run: ${{ github.event.inputs.buildCommand }}
