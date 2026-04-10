@@ -36,6 +36,16 @@ jobs:
           ref: ${{ github.event.inputs.projectBranch }}
           fetch-depth: 1
 
+      - name: Checkout your custom Dockerfile
+        uses: actions/checkout@v4
+        with:
+          path: my-custom-files
+
+      # 3. 用你的 Dockerfile 替换目标项目里的
+      - name: Replace with your Dockerfile
+        run: |
+          cp -f my-custom-files/Dockerfile ./Dockerfile.openclaw
+
       # 核心：执行 docker build
       - name: Run Docker Build
         run: |
