@@ -59,12 +59,12 @@ jobs:
       - name: 保存镜像为压缩包
         run: |
           image="${{ github.event.inputs.outputImage }}"
-          docker save "${image}" | gzip -9 > "${image//\//_}.tar.gz"
+          docker save "${image}" | gzip -9 > "image.tar.gz"
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
           name: docker-images-tar
-          path: *.tar.gz
+          path: image.tar.gz
           retention-days: 1
 
