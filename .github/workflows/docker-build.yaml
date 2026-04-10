@@ -1,0 +1,42 @@
+name: Docker Build Only
+
+on:
+  workflow_dispatch:
+    inputs:
+      # 你要拉取的 GitHub 项目（如：user/repo）
+      projectName:
+        description: 'GitHub 项目名称 (格式：owner/repo)'
+        required: true
+      
+      # 分支 / Tag / 版本号
+      projectBranch:
+        description: '分支/Tag/版本'
+        required: true
+      
+      # 运行系统
+      runnerType:
+        description: '运行操作系统'
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest
+          - ubuntu-22.04-arm
+
+jobs:
+  docker-build:
+    runs-on: ${{ github.event.inputs.runnerType }}
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Project Code
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.projectName }}
+          ref: ${{ github.event.inputs.projectBranch }}
+          fetch-depth: 1
+
+      # 核心：执行 docker build
+      - name: Run Docker Build
+        run: |
+          docker build -f Dockerfile.openclaw -t openclaw:local .
