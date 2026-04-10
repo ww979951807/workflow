@@ -12,6 +12,11 @@ on:
       projectBranch:
         description: '分支/Tag/版本'
         required: true
+
+      # 镜像名称:版本
+      outputImage:
+        description: '生成的镜像名称:版本 (例如：myapp:v1.0)'
+        required: true
       
       # 运行系统
       runnerType:
@@ -49,4 +54,17 @@ jobs:
       # 核心：执行 docker build
       - name: Run Docker Build
         run: |
-          docker build -f Dockerfile.openclaw -t openclaw:local .
+          docker build -f Dockerfile.openclaw -t ${{ github.event.inputs.outputImage }} .
+
+      - name: 保存镜像为压缩包
+        run: |
+          image="${{ github.event.inputs.outputImage }}"
+          docker save "${image}" | gzip -9 > "${image//\//_}.tar.gz"
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-images-tar
+          path: *.tar.gz
+          retention-days: 1
+
